@@ -1,0 +1,50 @@
+#
+# @author   박 수 빈
+# @verison  1.0.0
+#
+
+server:
+  port: 80
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: gopp-v1
+  main:
+    banner-mode: OFF
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    suffix: .html
+    cache: false
+  web:
+    resources:
+      static-locations:
+        - file:src/main/resources/static/
+      cache:
+        period: 36000
+  datasource:
+    url: jdbc:mariadb://localhost:3306/gopp_db?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: suihin
+    password: tq5033
+    driver-class-name: org.mariadb.jdbc.Driver
+
+mybatis:
+  configuration:
+    cache-enabled: false
+    local-cache-scope: STATEMENT
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    jdbc-type-for-null: NULL
+  type-aliases-package: com.beany.gopp.domain.**.dto
+  type-handlers-package: com.beany.gopp.common.mybatis.handler
+  mapper-locations:
+    - classpath:mapper/**/*_mapper.xml
+
+logging:
+  level:
+    root: info
+    web: info
